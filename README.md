@@ -2,85 +2,157 @@
 
 # 
 
-# Complete quality assurance plan for the Urban Scooter web and mobile application,
-
-# covering manual testing, API validation, mobile testing, and SQL data validation.
+# <div align="center">
 
 # 
 
-# \## 📋 Project Overview
+# !\[Manual Testing](https://img.shields.io/badge/Manual%20Testing-76%20Cases-blue?style=for-the-badge\&logo=checkmarx)
+
+# !\[API Testing](https://img.shields.io/badge/API%20Testing-Postman-orange?style=for-the-badge\&logo=postman)
+
+# !\[Mobile](https://img.shields.io/badge/Mobile%20Testing-Android-green?style=for-the-badge\&logo=android)
+
+# !\[SQL](https://img.shields.io/badge/Data%20Validation-SQL-lightgrey?style=for-the-badge\&logo=postgresql)
 
 # 
 
-# | Item | Detail |
+# \*\*Complete quality assurance plan for a scooter rental web + mobile application.\*\*  
 
-# |---|---|
-
-# | Application | Urban Scooter — scooter rental web + mobile app |
-
-# | QA Type | Manual Testing, API Testing, Mobile Testing, SQL Validation |
-
-# | Total Test Cases | 76 (41 web + 35 mobile) |
-
-# | Bugs Reported | 15+ documented with severity and priority |
-
-# | Tools Used | Jira, Postman, SQL, Chrome DevTools, Android Emulator |
+# \*Manual testing · API validation · Mobile QA · SQL data integrity\*
 
 # 
 
-# \## 🧪 What was tested
+# </div>
 
 # 
 
-# \### Web Application (41 test cases)
-
-# \- User registration and login flows
-
-# \- Form field validation — equivalence classes and boundary values
-
-# \- Order creation and management
-
-# \- UI behavior across different screen sizes
+# \---
 
 # 
 
-# \### Mobile Application (35 test cases)
+# \## 🎯 Project at a Glance
 
-# \- Login and authentication flows
-
-# \- Order placement and tracking
-
-# \- Push notification delivery
-
-# \- Offline mode behavior
-
-# \- Emulator vs real device validation
+# Application   →  Urban Scooter (web + Android mobile app)
 
 # 
 
-# \### API Testing (Postman)
-
-# \- Courier creation endpoint
-
-# \- Order cancellation flow
-
-# \- Station search validation
-
-# \- Authentication token handling
-
-# \- Status code validation (200, 400, 401, 404, 422)
+# Test Cases    →  76 total  (41 web  |  35 mobile)
 
 # 
 
-# \### SQL Data Validation
+# Bugs Found    →  15+ documented with severity, priority and reproduction steps
 
-# \- Delivery time queries
+# 
 
-# \- User activity reports
+# Techniques    →  Equivalence classes · Boundary values · Decision tables · Exploratory
+
+# 
+
+# Tools         →  Jira · Postman · SQL · Chrome DevTools · Android Emulator
+
+# 
+
+# \---
+
+# 
+
+# \## 🗂️ What Was Tested
+
+# 
+
+# \### 🌐 Web Application — 41 Test Cases
+
+# 
+
+# | Area | Cases | Result |
+
+# |---|---|---|
+
+# | Registration \& login flows | 8 | ✅ Passed |
+
+# | Form field validation (boundary values) | 18 | ✅ Passed |
+
+# | Order creation \& management | 10 | ✅ Passed |
+
+# | UI behavior \& responsiveness | 5 | ✅ Passed |
+
+# 
+
+# \### 📱 Mobile Application — 35 Test Cases
+
+# 
+
+# | Area | Cases | Result |
+
+# |---|---|---|
+
+# | Login \& authentication | 8 | ✅ Passed |
+
+# | Order placement \& tracking | 12 | ✅ Passed |
+
+# | Push notification delivery | 7 | ✅ Passed |
+
+# | Offline mode behavior | 8 | ✅ Passed |
+
+# 
+
+# \### 🔌 API Testing — Postman
+
+# 
+
+# | Endpoint | Method | Validated |
+
+# |---|---|---|
+
+# | Create courier | POST | ✅ |
+
+# | Cancel order | PUT | ✅ |
+
+# | Search stations | GET | ✅ |
+
+# | Authentication flow | POST | ✅ |
+
+# | Status codes | 200 / 400 / 401 / 404 / 422 | ✅ |
+
+# 
+
+# \### 🗄️ SQL Data Validation
+
+# 
+
+# \- Delivery time consistency across tables
+
+# \- User activity audit queries
 
 # \- Employee salary data integrity
 
 # \- Backend data consistency checks
+
+# 
+
+# \---
+
+# 
+
+# \## 🔍 Test Design Techniques
+
+# 
+
+# | Technique | Applied To |
+
+# |---|---|
+
+# | \*\*Equivalence Class Partitioning\*\* | Form fields — valid vs invalid input groups |
+
+# | \*\*Boundary Value Analysis\*\* | Name length, phone format, date ranges |
+
+# | \*\*Decision Tables\*\* | Order flow combinations |
+
+# | \*\*Exploratory Testing\*\* | Edge cases beyond formal test cases |
+
+# 
+
+# \---
 
 # 
 
@@ -94,11 +166,11 @@
 
 # 
 
-# ├── test-cases/
+# ├── 📊 test-cases/
 
 # 
 
-# │   └── urban-scooter-test-cases.xlsx   # Full test suite (web + mobile)
+# │   └── urban-scooter-test-cases.xlsx
 
 # 
 
@@ -106,15 +178,15 @@
 
 # 
 
-# ├── api-testing/                         # Postman collections (coming soon)
+# ├── 🔌 api-testing/
 
 # 
 
-# ├── sql-queries/                         # SQL validation queries (coming soon)
+# ├── 🗄️ sql-queries/
 
 # 
 
-# ├── bug-reports/                         # Bug documentation (coming soon)
+# ├── 🐛 bug-reports/
 
 # 
 
@@ -126,37 +198,7 @@
 
 # 
 
-# \## 🔍 Test Design Techniques Used
-
-# 
-
-# \- \*\*Equivalence Class Partitioning\*\* — grouped valid/invalid inputs for form fields
-
-# \- \*\*Boundary Value Analysis\*\* — tested min/max limits for name, phone, date fields
-
-# \- \*\*Decision Tables\*\* — mapped combinations of conditions for order flows
-
-# \- \*\*Exploratory Testing\*\* — uncovered edge cases not covered by formal test cases
-
-# 
-
-# \## 📊 Test Results Summary
-
-# 
-
-# | Area | Test Cases | Status |
-
-# |---|---|---|
-
-# | Web — Valid flows | 12 | ✅ All passed |
-
-# | Web — Invalid inputs | 29 | ✅ All passed |
-
-# | Mobile — Core flows | 20 | ✅ All passed |
-
-# | Mobile — Edge cases | 15 | ✅ All passed |
-
-# | API endpoints | 8 | ✅ All validated |
+# \---
 
 # 
 
@@ -164,7 +206,13 @@
 
 # 
 
-# \*\*Santiago Valencia Cortés\*\* — QA Engineer  
+# \*\*Santiago Valencia Cortés\*\*  
 
-# \[GitHub](https://github.com/SantiagoSvc) · \[LinkedIn](https://linkedin.com/in/santivacomecatronica)
+# Mechatronics Engineer → QA Engineer
+
+# 
+
+# \[!\[GitHub](https://img.shields.io/badge/GitHub-SantiagoSvc-black?style=flat\&logo=github)](https://github.com/SantiagoSvc)
+
+# \[!\[LinkedIn](https://img.shields.io/badge/LinkedIn-Santiago%20Valencia-blue?style=flat\&logo=linkedin)](https://linkedin.com/in/santivacomecatronica)
 
