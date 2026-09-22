@@ -1,96 +1,125 @@
-﻿# Urban Scooter - Full QA Plan
+# Urban Scooter — Plan de QA completo
 
-![Manual Testing](https://img.shields.io/badge/Manual_Testing-76_Cases-blue?style=for-the-badge)
+![Manual Testing](https://img.shields.io/badge/Manual_Testing-100_Cases-blue?style=for-the-badge)
 ![API Testing](https://img.shields.io/badge/API_Testing-Postman-orange?style=for-the-badge&logo=postman)
 ![Mobile](https://img.shields.io/badge/Mobile_Testing-Android-green?style=for-the-badge&logo=android)
-![SQL](https://img.shields.io/badge/Data_Validation-SQL-lightgrey?style=for-the-badge&logo=postgresql)
+![Jira](https://img.shields.io/badge/Defect_Tracking-Jira-0052CC?style=for-the-badge&logo=jira)
 
-**Complete quality assurance plan for a scooter rental web + mobile application.**
-Manual testing · API validation · Mobile QA · SQL data integrity
+**Plan de aseguramiento de calidad para una aplicación de alquiler de scooters (web + Android).**
+Pruebas manuales · Diseño de casos · Validación de API · Gestión de defectos en Jira
 
 ---
 
-## Project at a Glance
+## Resumen del proyecto
 
-| Item | Detail |
+| Ítem | Detalle |
 |---|---|
-| Application | Urban Scooter — scooter rental web + Android mobile app |
-| Test Cases | 76 total — 41 web, 35 mobile |
-| Bugs Found | 15+ documented with severity, priority and steps to reproduce |
-| Techniques | Equivalence classes, Boundary values, Decision tables, Exploratory |
-| Tools | Jira, Postman, SQL, Chrome DevTools, Android Emulator |
+| Aplicación | Urban Scooter — alquiler de scooters, web y app Android |
+| Casos ejecutados | **100** — 41 web, 35 móvil, 24 API |
+| Defectos | 43 hallazgos en 33 tickets de Jira |
+| Técnicas | Clases de equivalencia, valores límite, pruebas exploratorias |
+| Herramientas | Jira, Postman, Chrome DevTools, Emulador de Android Studio |
 
 ---
 
-## What Was Tested
+## Objetivo
 
-### Web Application — 41 Test Cases
+Verificar que la aplicación de Urban Scooter cumpla con los requisitos funcionales antes
+de su lanzamiento, con foco en los flujos que generan ingresos: registro de usuarios,
+creación y gestión de pedidos, y comunicación entre la app y el backend.
 
-| Area | Cases | Result |
-|---|---|---|
-| Registration and login flows | 8 | Passed |
-| Form field validation with boundary values | 18 | Passed |
-| Order creation and management | 10 | Passed |
-| UI behavior and responsiveness | 5 | Passed |
-
-### Mobile Application — 35 Test Cases
-
-| Area | Cases | Result |
-|---|---|---|
-| Login and authentication | 8 | Passed |
-| Order placement and tracking | 12 | Passed |
-| Push notification delivery | 7 | Passed |
-| Offline mode behavior | 8 | Passed |
-
-### API Testing with Postman
-
-| Endpoint | Method | Status |
-|---|---|---|
-| Create courier | POST | Validated |
-| Cancel order | PUT | Validated |
-| Search stations | GET | Validated |
-| Authentication flow | POST | Validated |
-| Status codes 200, 400, 401, 404, 422 | ALL | Validated |
-
-### SQL Data Validation
-
-- Delivery time consistency across tables
-- User activity audit queries
-- Employee salary data integrity
-- Backend data consistency checks
+El riesgo que se busca prevenir es que un pedido se pierda, se duplique o se asigne al
+repartidor equivocado por un fallo de validación o de sincronización, y que un usuario
+quede bloqueado en un estado ambiguo cuando pierde la conexión.
 
 ---
 
-## Test Design Techniques
+## Qué se probó
 
-| Technique | Applied To |
+### Aplicación web — 41 revisiones
+[`test-cases/web-checklist.md`](test-cases/web-checklist.md)
+
+Página de inicio, formulario de pedido, validación de campos obligatorios, longitudes,
+flujo completo de creación de pedido y comportamiento de la interfaz.
+Ejecutado en **Chrome y Opera**.
+
+### Validación de datos — 30 pruebas
+[`test-cases/data-validation.md`](test-cases/data-validation.md)
+
+Particiones de clases de equivalencia y análisis de valores límite sobre cada campo del
+formulario: longitud mínima, máxima, valores dentro y fuera del rango, y tipo de dato.
+
+### Aplicación móvil Android — 35 casos
+[`test-cases/mobile-test-cases.md`](test-cases/mobile-test-cases.md)
+
+Organizados por módulo: Login, Pedidos, Modo sin conexión, Notificaciones y General.
+Cada caso documenta precondiciones, pasos, resultado esperado y resultado obtenido.
+Ejecutado en emulador de Android Studio.
+
+### API — 24 casos
+[`api-testing/api-checklist.md`](api-testing/api-checklist.md)
+
+Validación de endpoints con Postman: `/health`, `/stations`, creación de repartidores,
+login, creación y cancelación de pedidos. Se verificaron códigos de estado 200, 201,
+400, 401, 404 y los mensajes de error asociados.
+
+### Defectos
+[`bug-reports/bug-reports.md`](bug-reports/bug-reports.md)
+
+---
+
+## Técnicas de diseño aplicadas
+
+| Técnica | Aplicada a |
 |---|---|
-| Equivalence Class Partitioning | Form fields — valid vs invalid input groups |
-| Boundary Value Analysis | Name length, phone format, date ranges |
-| Decision Tables | Order flow condition combinations |
-| Exploratory Testing | Edge cases beyond formal test cases |
+| Particiones de clases de equivalencia | Campos del formulario — grupos de entrada válidos e inválidos |
+| Análisis de valores límite | Longitud de nombre y apellido, formato de teléfono, rangos de fecha |
+| Pruebas exploratorias | Casos borde fuera de los casos formales |
+| Pruebas de estado | Transiciones de pedido: libre, aceptado, completado |
 
 ---
 
-## Repository Structure
+## Hallazgos destacados
 
-    urban-scooter-qa/
-    |
-    +-- test-cases/
-    |   +-- urban-scooter-test-cases.xlsx
-    |
-    +-- api-testing/
-    +-- sql-queries/
-    +-- bug-reports/
-    |
-    +-- README.md
+**Modo sin conexión.** El pop-up de "Sin acceso a Internet" no coincide con el diseño
+especificado y no bloquea la interacción con la pantalla de fondo, lo que deja la app en
+un estado ambiguo para el usuario.
+
+**Notificaciones.** Siete casos quedaron marcados como *bloqueados* en lugar de fallidos:
+la funcionalidad no está implementada en la API ni en la aplicación, por lo que la prueba
+no se puede ejecutar. Se documentaron igualmente para dejar constancia de la cobertura
+pendiente y evitar que se den por cubiertos en un ciclo posterior.
+
+**Valores límite en login.** El mensaje de error no se comporta según el requisito en los
+límites de longitud de usuario y contraseña.
 
 ---
 
-## Author
+## Estructura del repositorio
 
-**Santiago Valencia Cortes** — QA Engineer
-Mechatronics Engineer transitioning into QA Automation and AI Testing
+```
+urban-scooter-qa/
+├── test-cases/
+│   ├── urban-scooter-test-cases.xlsx   Documento completo del plan de pruebas
+│   ├── web-checklist.md                41 revisiones de la aplicación web
+│   ├── data-validation.md              30 pruebas de clases de equivalencia y límites
+│   └── mobile-test-cases.md            35 casos de la aplicación Android
+├── api-testing/
+│   └── api-checklist.md                24 casos de validación de endpoints
+├── bug-reports/
+│   └── bug-reports.md                  Defectos encontrados y referencia en Jira
+└── README.md
+```
 
-GitHub: https://github.com/SantiagoSvc
-LinkedIn: https://linkedin.com/in/santivacomecatronica
+> Los defectos se registraron en un proyecto de Jira privado. Las tablas de este
+> repositorio incluyen la referencia de cada ticket; las capturas de pantalla se pueden
+> compartir a solicitud.
+
+---
+
+## Autor
+
+**Santiago Valencia Cortés** — Ingeniero QA
+Ingeniero Mecatrónico orientado a QA manual y automatización de pruebas.
+
+GitHub: <https://github.com/SantiagoSvc> · LinkedIn: <https://linkedin.com/in/santivacomecatronica>
